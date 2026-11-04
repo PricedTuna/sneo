@@ -1,0 +1,48 @@
+@property --sneo-button-offset {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: -2px;
+}
+
+.sneo-button {
+  box-sizing: border-box;
+  padding: 10px 20px;
+  border: 2px solid #000;
+  border-radius: 0;
+  color: #000;
+  font-family: 'JetBrains Mono', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  --sneo-button-offset: -2px;
+  transform: translate(var(--sneo-button-offset), var(--sneo-button-offset));
+  box-shadow: calc(4px - var(--sneo-button-offset)) calc(4px - var(--sneo-button-offset)) 0 #000;
+  transition: --sneo-button-offset 60ms ease, background 60ms ease;
+}
+
+.sneo-button--yellow { background-color: #ffd029; }
+.sneo-button--blue { background-color: #0500ff; color: #fff; }
+.sneo-button--green { background-color: #34b67b; color: #fff; }
+.sneo-button--pink { background-color: #ea4c89; }
+
+.sneo-button:not(:disabled):hover {
+  --sneo-button-offset: -6px;
+}
+
+.sneo-button:not(:disabled):active {
+  --sneo-button-offset: 2px;
+}
+
+.sneo-button:focus-visible {
+  outline: 4px solid #4c9ffe;
+  outline-offset: 4px;
+}
+
+.sneo-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sneo-button { transition: none; }
+}
