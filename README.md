@@ -2,9 +2,9 @@
 
 React components with a neo-brutalist style, written in TypeScript. The package includes buttons, cards, menus, forms, tables, dialogs, and shared theme settings.
 
-[Open the playground](http://localhost:3000/playground) (requires the showpage to be running locally).
+[Open the playground](https://sneo-showpage.vercel.app).
 
-[GitHub repository](https://github.com/PricedTuna/sneo) (private).
+[GitHub repository](https://github.com/PricedTuna/sneo).
 
 ## Installation
 
