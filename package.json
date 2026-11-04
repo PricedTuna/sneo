@@ -1,7 +1,7 @@
 {
   "name": "sneo-brutalism",
-  "version": "0.1.0",
-  "description": "Biblioteca de componentes React con TypeScript",
+  "version": "0.1.1",
+  "description": "Neo-brutalist React components written in TypeScript",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -31,5 +31,9 @@
     "react-dom": "^19.3.1",
     "typescript": "^5.7.0",
     "vite": "^8.3.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PricedTuna/sneo.git"
   }
 }
