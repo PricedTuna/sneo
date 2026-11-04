@@ -30,9 +30,10 @@ The default font is JetBrains Mono, with system fallbacks. Load JetBrains Mono i
 ### Button
 
 `Button` accepts standard button attributes and a ref. Its default `type` is `button`, and `variant` can be `yellow` (default), `blue`, `green`, or `pink`.
+Use `padding` to set any CSS padding value (or a number in pixels); the default is `10px 20px`. The `style` prop takes precedence if it also specifies padding.
 
 ```tsx
-<Button variant="blue" onClick={() => console.log('Saved')}>Save</Button>
+<Button variant="blue" padding="12px 24px" onClick={() => console.log('Saved')}>Save</Button>
 ```
 
 ### Dropdown
