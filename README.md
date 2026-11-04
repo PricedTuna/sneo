@@ -4,6 +4,8 @@ React components with a neo-brutalist style, written in TypeScript. The package 
 
 [Open the playground](http://localhost:3000/playground) (requires the showpage to be running locally).
 
+[GitHub repository](https://github.com/PricedTuna/sneo) (private).
+
 ## Installation
 
 ```bash
