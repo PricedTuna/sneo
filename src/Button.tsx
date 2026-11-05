@@ -1,7 +1,7 @@
 import { forwardRef, type ButtonHTMLAttributes, type CSSProperties } from 'react';
-import { useThemeStyles, type ThemeConfig } from './Theme.js';
+import { useThemeStyles, type ThemeConfig, type ElevationProps } from './Theme.js';
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ElevationProps, ButtonHTMLAttributes<HTMLButtonElement> {
   /** Color de fondo del botón. */
   variant?: 'yellow' | 'blue' | 'green' | 'pink';
   /** Padding CSS del botón; por defecto es 10px 20px. */
@@ -11,10 +11,10 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 /** Botón inspirado en los controles de tokens-dashboard. Importa también sneo-brutalism/styles.css. */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  { variant = 'yellow', padding, theme, style, className, type = 'button', ...props },
+  { variant = 'yellow', padding, theme, shadowOffset, elevation, hoverElevation, pressedOffset, style, className, type = 'button', ...props },
   ref,
 ) {
-  const themeStyles = useThemeStyles(theme);
+  const themeStyles = useThemeStyles(theme, shadowOffset, { elevation, hoverElevation, pressedOffset });
   return (
     <button
       {...props}

@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
 import { Button } from './Button.js';
-import { useThemeStyles, type ThemeConfig } from './Theme.js';
+import { useThemeStyles, type ThemeConfig, type ElevationProps } from './Theme.js';
 
 export interface DropdownItem {
   /** Identificador estable y único dentro del menú. */
@@ -11,7 +11,7 @@ export interface DropdownItem {
   disabled?: boolean;
 }
 
-export interface DropdownProps {
+export interface DropdownProps extends ElevationProps {
   label: ReactNode;
   items: DropdownItem[];
   disabled?: boolean;
@@ -20,8 +20,8 @@ export interface DropdownProps {
 }
 
 /** Menú de acciones inspirado en tokens-dashboard. */
-export function Dropdown({ label, items, disabled = false, className, theme }: DropdownProps) {
-  const themeStyles = useThemeStyles(theme);
+export function Dropdown({ label, items, disabled = false, className, theme, shadowOffset, elevation, hoverElevation, pressedOffset }: DropdownProps) {
+  const themeStyles = useThemeStyles(theme, shadowOffset, { elevation, hoverElevation, pressedOffset });
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -54,7 +54,7 @@ export function Dropdown({ label, items, disabled = false, className, theme }: D
       }}
     >
       <div className="sneo-dropdown__anchor">
-      <Button ref={triggerRef} theme={theme} variant="blue" disabled={disabled} aria-expanded={isOpen}
+      <Button ref={triggerRef} theme={theme} shadowOffset={shadowOffset} elevation={elevation} hoverElevation={hoverElevation} pressedOffset={pressedOffset} variant="blue" disabled={disabled} aria-expanded={isOpen}
         aria-controls={isOpen ? panelId : undefined} onClick={() => setOpen((value) => !value)}>
         {label}<span className="sneo-dropdown__arrow" aria-hidden="true" data-open={isOpen}>⌄</span>
       </Button>

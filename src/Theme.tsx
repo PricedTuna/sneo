@@ -24,8 +24,18 @@ export function ThemeProvider({ config, children }: { config: ThemeConfig; child
   return <ThemeContext.Provider value={{ ...parent, ...config }}>{children}</ThemeContext.Provider>;
 }
 
-export function useThemeStyles(overrides?: ThemeConfig): CSSProperties {
-  const config = { ...useContext(ThemeContext), ...overrides };
+/** Desplazamiento de la sombra en píxeles; sobrescribe el tema. */
+export interface ShadowProps { shadowOffset?: number }
+/** Elevación de controles interactivos, en píxeles. */
+export interface ElevationProps extends ShadowProps {
+  elevation?: number;
+  hoverElevation?: number;
+  pressedOffset?: number;
+}
+
+export function useThemeStyles(overrides?: ThemeConfig, shadowOffset?: number, elevationProps?: ElevationProps): CSSProperties {
+  const { elevation, hoverElevation, pressedOffset } = elevationProps ?? {};
+  const config = { ...useContext(ThemeContext), ...overrides, ...(shadowOffset != null && { shadowOffset, dropdownShadowOffset: shadowOffset }), ...(elevation != null && { elevation }), ...(hoverElevation != null && { hoverElevation }), ...(pressedOffset != null && { pressedOffset }) };
   return {
     ...(config.primaryColor && { '--sneo-primary': config.primaryColor }),
     ...(config.accentColor && { '--sneo-accent': config.accentColor }),

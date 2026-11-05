@@ -1,7 +1,7 @@
 import { useEffect, useId, useRef, type ReactNode } from 'react';
-import { useThemeStyles, type ThemeConfig } from './Theme.js';
+import { useThemeStyles, type ThemeConfig, type ShadowProps } from './Theme.js';
 
-export interface ModalProps {
+export interface ModalProps extends ShadowProps {
   open: boolean;
   onClose: () => void;
   title: ReactNode;
@@ -12,10 +12,10 @@ export interface ModalProps {
 }
 
 /** Diálogo modal controlado con foco y fondo modal nativos. */
-export function Modal({ open, onClose, title, children, closeLabel = 'Cerrar', closeOnBackdrop = true, theme }: ModalProps) {
+export function Modal({ open, onClose, title, children, closeLabel = 'Cerrar', closeOnBackdrop = true, theme, shadowOffset }: ModalProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const titleId = useId();
-  const themeStyles = useThemeStyles(theme);
+  const themeStyles = useThemeStyles(theme, shadowOffset);
 
   useEffect(() => {
     const dialog = dialogRef.current;

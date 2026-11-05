@@ -1,6 +1,6 @@
 import { StrictMode, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Alert, Button, Card, Checkbox, Dropdown, Field, Input, Modal, Select, Table, ThemeProvider, Tooltip } from '../src/index';
+import { Accordion, Alert, Badge, BottomNavbar, BottomNavbarItem, Button, Card, Checkbox, Dropdown, Field, Input, Modal, Select, Table, Tabs, ThemeProvider, Tooltip, TopNavbar, TopNavbarItem } from '../src/index';
 import '../src/styles.css';
 import './styles.css';
 
@@ -11,12 +11,56 @@ function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [name, setName] = useState('');
   const [accepted, setAccepted] = useState(false);
+  const [activePage, setActivePage] = useState('inicio');
 
   return (
     <main>
+      <TopNavbar aria-label="Navegación superior de ejemplo" brand={<strong>SNEO /</strong>} action={<Button padding={4} onClick={() => setModalOpen(true)}>Crear +</Button>}>
+        {['Inicio', 'Explorar', 'Ayuda'].map((label) => (
+          <TopNavbarItem key={label} href={`#${label.toLowerCase()}`} active={activePage === label.toLowerCase()} onClick={(event) => { event.preventDefault(); setActivePage(label.toLowerCase()); }}>{label}</TopNavbarItem>
+        ))}
+      </TopNavbar>
+      <BottomNavbar aria-label="Navegación de ejemplo">
+        {[
+          { id: 'inicio', icon: '⌂' },
+          { id: 'buscar', icon: '⌕' },
+          { id: 'perfil', icon: '●' },
+        ].map((item) => (
+          <BottomNavbarItem key={item.id} href={`#${item.id}`} active={activePage === item.id} onClick={(event) => { event.preventDefault(); setActivePage(item.id); }}>
+            <span aria-hidden="true">{item.icon}</span>{item.label}
+          </BottomNavbarItem>
+        ))}
+      </BottomNavbar>
       <p className="eyebrow">SNEO BRUTALISM / COMPONENTES</p>
       <h1>Botones</h1>
       <p>Prueba los colores y pasa el cursor por cada botón para ver su animación.</p>
+      <section>
+        <h2>Navegación flotante</h2>
+        <p>Prueba las barras flotantes superior e inferior. Seleccionada: {activePage}.</p>
+      </section>
+      <section>
+        <h2>Tabs</h2>
+        <Tabs label="Ejemplo de pestañas" items={[
+          { id: 'resumen', label: 'Resumen', content: 'Una vista general del proyecto.' },
+          { id: 'actividad', label: 'Actividad', content: 'Consulta los cambios recientes.' },
+          { id: 'ajustes', label: 'Ajustes', content: 'Personaliza tu espacio.' },
+        ]} />
+      </section>
+      <section>
+        <h2>Preguntas frecuentes</h2>
+        <Accordion title="¿Qué es sneo?" open>Una librería de componentes React con estilo neobrutalista.</Accordion>
+        <Accordion title="¿Puedo personalizar los colores?">Sí, puedes usar ThemeProvider o la propiedad theme de cada componente.</Accordion>
+        <Accordion title="¿Funciona con teclado?">Sí, puedes abrir y cerrar cada pregunta con Enter o Espacio.</Accordion>
+      </section>
+      <section>
+        <h2>Badges</h2>
+        <div className="examples">
+          <Badge>Nuevo</Badge>
+          <Badge variant="blue">En progreso</Badge>
+          <Badge variant="green">Listo</Badge>
+          <Badge variant="pink" padding="6px 12px">Destacado</Badge>
+        </div>
+      </section>
       <section>
         <h2>Formulario y alertas</h2>
         <div className="form-example">

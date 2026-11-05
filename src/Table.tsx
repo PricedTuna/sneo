@@ -1,5 +1,5 @@
 import { type Key, type ReactNode, type TableHTMLAttributes } from 'react';
-import { useThemeStyles, type ThemeConfig } from './Theme.js';
+import { useThemeStyles, type ThemeConfig, type ShadowProps } from './Theme.js';
 
 export interface TableColumn<T> {
   id: string;
@@ -7,7 +7,7 @@ export interface TableColumn<T> {
   render: (row: T) => ReactNode;
 }
 
-export interface TableProps<T> extends Omit<TableHTMLAttributes<HTMLTableElement>, 'children'> {
+export interface TableProps<T> extends ShadowProps, Omit<TableHTMLAttributes<HTMLTableElement>, 'children'> {
   columns: TableColumn<T>[];
   rows: T[];
   getRowKey: (row: T) => Key;
@@ -16,8 +16,8 @@ export interface TableProps<T> extends Omit<TableHTMLAttributes<HTMLTableElement
   theme?: ThemeConfig;
 }
 
-export function Table<T>({ columns, rows, getRowKey, emptyMessage = 'No hay datos disponibles', caption, theme, className, style, ...props }: TableProps<T>) {
-  const themeStyles = useThemeStyles(theme);
+export function Table<T>({ columns, rows, getRowKey, emptyMessage = 'No hay datos disponibles', caption, theme, shadowOffset, className, style, ...props }: TableProps<T>) {
+  const themeStyles = useThemeStyles(theme, shadowOffset);
   return (
     <div className="sneo-table-root" style={themeStyles}>
       {caption && <div className="sneo-table-title" aria-hidden="true">{caption}</div>}

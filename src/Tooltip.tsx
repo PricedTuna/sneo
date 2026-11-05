@@ -1,7 +1,7 @@
 import { useId, useState, type ReactNode } from 'react';
-import { useThemeStyles, type ThemeConfig } from './Theme.js';
+import { useThemeStyles, type ThemeConfig, type ShadowProps } from './Theme.js';
 
-export interface TooltipProps {
+export interface TooltipProps extends ShadowProps {
   content: ReactNode;
   label?: string;
   theme?: ThemeConfig;
@@ -9,12 +9,12 @@ export interface TooltipProps {
 }
 
 /** Ayuda breve disponible al pasar el cursor o enfocar el botón. */
-export function Tooltip({ content, label = 'Más información', theme, className }: TooltipProps) {
+export function Tooltip({ content, label = 'Más información', theme, className, shadowOffset }: TooltipProps) {
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const id = useId();
-  const themeStyles = useThemeStyles(theme);
+  const themeStyles = useThemeStyles(theme, shadowOffset);
   const visible = (hovered || focused) && !dismissed;
 
   return (
